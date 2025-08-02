@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rec_Management", "Rec_Management\Rec_Management.csproj", "{DF07111A-43F9-C1F4-A8E2-EEDF88DDBF1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF07111A-43F9-C1F4-A8E2-EEDF88DDBF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF07111A-43F9-C1F4-A8E2-EEDF88DDBF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF07111A-43F9-C1F4-A8E2-EEDF88DDBF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF07111A-43F9-C1F4-A8E2-EEDF88DDBF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47D9004F-2FF8-45B6-9463-56A2AEDA77B6}
+	EndGlobalSection
+EndGlobal

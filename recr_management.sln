@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "recruitment_management_backend", "recruitment_management_backend", "{47ED4A6A-BCE8-534E-056F-49ED58753D06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rec_Management", "recruitment_management_backend\Rec_Management\Rec_Management.csproj", "{0A93CFA6-7C09-65A7-8FEA-B0D24E540294}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A93CFA6-7C09-65A7-8FEA-B0D24E540294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A93CFA6-7C09-65A7-8FEA-B0D24E540294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A93CFA6-7C09-65A7-8FEA-B0D24E540294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A93CFA6-7C09-65A7-8FEA-B0D24E540294}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A93CFA6-7C09-65A7-8FEA-B0D24E540294} = {47ED4A6A-BCE8-534E-056F-49ED58753D06}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C008A581-1B9F-4FD9-B5CD-7B5162317C35}
+	EndGlobalSection
+EndGlobal
