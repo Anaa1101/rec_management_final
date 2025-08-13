@@ -1,0 +1,88 @@
+.job-apply-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-apply-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="file"] {
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.skills-input {
+  margin-bottom: 15px;
+}
+
+.skills-input input {
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tag button {
+  background: none;
+  border: none;
+  color: white;
+  margin-left: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  padding: 10px 15px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}

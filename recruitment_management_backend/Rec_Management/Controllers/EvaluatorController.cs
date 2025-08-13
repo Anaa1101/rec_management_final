@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecruitmentManagement.Data;
 using RecruitmentManagement.Models;
+using RecruitmentManagement.DTOs;
 
 namespace Rec_Management.Controllers
 {
@@ -16,28 +17,32 @@ namespace Rec_Management.Controllers
             _context = context;
         }
 
-        // Get all evaluators
+        // GET: api/Evaluator
         [HttpGet]
         public async Task<IActionResult> GetEvaluators()
         {
             return Ok(await _context.Evaluators.ToListAsync());
         }
 
-        // Create new evaluator
+        // POST: api/Evaluator
         [HttpPost]
-        public async Task<IActionResult> CreateEvaluator(Evaluator evaluator)
+        public async Task<IActionResult> CreateEvaluator([FromBody] Evaluator evaluator)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Evaluators.Add(evaluator);
             await _context.SaveChangesAsync();
             return Ok(evaluator);
         }
 
-        // Update evaluator
+        // PUT: api/Evaluator/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEvaluator(int id, Evaluator evaluator)
+        public async Task<IActionResult> UpdateEvaluator(int id, [FromBody] Evaluator evaluator)
         {
             var existing = await _context.Evaluators.FindAsync(id);
-            if (existing == null) return NotFound();
+            if (existing == null)
+                return NotFound();
 
             existing.Name = evaluator.Name;
             existing.Email = evaluator.Email;
@@ -48,16 +53,38 @@ namespace Rec_Management.Controllers
             return Ok(existing);
         }
 
-        // Delete evaluator
+        // DELETE: api/Evaluator/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvaluator(int id)
         {
             var evaluator = await _context.Evaluators.FindAsync(id);
-            if (evaluator == null) return NotFound();
+            if (evaluator == null)
+                return NotFound();
 
             _context.Evaluators.Remove(evaluator);
             await _context.SaveChangesAsync();
             return Ok(new { message = "Evaluator deleted" });
+        }
+
+        // POST: api/Evaluator/login
+        [HttpPost("login")]
+    public IActionResult Login([FromBody] LoginRequestDTO loginRequest)
+    {
+        var user = _context.Evaluators
+            .FirstOrDefault(u => u.Email == loginRequest.Email && u.Password == loginRequest.Password);
+
+        if (user == null)
+        {
+            return Unauthorized("Invalid credentials");
+        }
+
+        return Ok(new
+        {
+            user.EvaluatorId,
+            user.Name,
+            user.Email,
+            user.Designation
+        });
         }
     }
 }

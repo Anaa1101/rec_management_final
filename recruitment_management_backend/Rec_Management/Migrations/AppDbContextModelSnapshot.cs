@@ -17,12 +17,12 @@ namespace Rec_Management.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("RecruitmentManagement.Models.Candidate", b =>
+            modelBuilder.Entity("Candidate", b =>
                 {
                     b.Property<int>("CandidateId")
                         .ValueGeneratedOnAdd()
@@ -30,19 +30,36 @@ namespace Rec_Management.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CandidateId"));
 
+                    b.Property<string>("College")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ResumeLink")
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ResumeFilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Skills")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("CandidateId");
+
+                    b.HasIndex("JobId");
 
                     b.ToTable("Candidates");
                 });
@@ -57,50 +74,91 @@ namespace Rec_Management.Migrations
 
                     b.Property<string>("Designation")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("EvaluatorId");
 
                     b.ToTable("Evaluators");
+
+                    b.HasData(
+                        new
+                        {
+                            EvaluatorId = 1,
+                            Designation = "Manager",
+                            Email = "manager@company.com",
+                            Name = "Manager User",
+                            Password = "Manager123"
+                        },
+                        new
+                        {
+                            EvaluatorId = 2,
+                            Designation = "HR",
+                            Email = "hr@company.com",
+                            Name = "HR User",
+                            Password = "Hr123"
+                        },
+                        new
+                        {
+                            EvaluatorId = 3,
+                            Designation = "SuperUser",
+                            Email = "superuser@company.com",
+                            Name = "Super User",
+                            Password = "Super123"
+                        });
                 });
 
             modelBuilder.Entity("RecruitmentManagement.Models.Interview", b =>
                 {
                     b.Property<int>("InterviewId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("interview_id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("InterviewId"));
 
                     b.Property<int>("CandidateId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("candidate_id");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("scheduled_date");
 
-                    b.Property<int>("RecruiterId")
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("notes");
+
+                    b.Property<int?>("RecruiterId")
                         .HasColumnType("int")
                         .HasColumnName("recruiter_id");
 
+                    b.Property<int>("RoundNumber")
+                        .HasColumnType("int")
+                        .HasColumnName("round_number");
+
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("status");
 
                     b.HasKey("InterviewId");
-
-                    b.HasIndex("CandidateId");
 
                     b.ToTable("Interviews");
                 });
@@ -113,24 +171,40 @@ namespace Rec_Management.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("JobId"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
+
                     b.Property<string>("JobName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("WorkMode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("JobId");
 
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("RecruitmentManagement.Models.Interview", b =>
+            modelBuilder.Entity("Candidate", b =>
                 {
-                    b.HasOne("RecruitmentManagement.Models.Candidate", "Candidate")
+                    b.HasOne("RecruitmentManagement.Models.Job", "Job")
                         .WithMany()
-                        .HasForeignKey("CandidateId")
+                        .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidate");
+                    b.Navigation("Job");
                 });
 #pragma warning restore 612, 618
         }

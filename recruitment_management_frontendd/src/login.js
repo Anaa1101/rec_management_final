@@ -13,11 +13,9 @@ const handleSubmit = async (e) => {
   setMessage("Logging in...");
 
   try {
-    const response = await fetch("http://localhost:5117/api/auth/login", { // adjust port
+    const response = await fetch("http://localhost:5117/api/Evaluator/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
@@ -27,19 +25,16 @@ const handleSubmit = async (e) => {
     }
 
     const data = await response.json();
-
-    // ✅ Check designation from backend
+localStorage.setItem('user', JSON.stringify(data));
+    // Redirect based on designation
     if (data.designation === "Manager") {
       navigate("/manager");
     } else if (data.designation === "HR") {
       navigate("/hr");
-    }
-    else if (data.designation === "SuperAdmin" ) {
-  setMessage("Login Successful!");
-  navigate("/superuser");
-    }
-
-     else {
+    } else if (data.designation === "SuperUser") {
+      setMessage("Login Successful!");
+      navigate("/superuser");
+    } else {
       setMessage("Unknown designation. Contact admin.");
     }
   } catch (error) {
@@ -47,6 +42,7 @@ const handleSubmit = async (e) => {
     setMessage("Server error. Please try again later.");
   }
 };
+
 
 
 

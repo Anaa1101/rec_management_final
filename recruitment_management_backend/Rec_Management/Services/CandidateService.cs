@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using RecruitmentManagement.Data;
 using RecruitmentManagement.Models;
